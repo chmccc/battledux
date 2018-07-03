@@ -4,12 +4,14 @@ import createBoard from './randomBoard';
 const playerBoard = createBoard();
 const compBoard = createBoard();
 
+console.log('playerboard: ', playerBoard);
+
 const initialState = {
   playerBoard,
   compBoard,
 }
 
-const gameReducer = (state = 0, action) => {
+const gameReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.PLAYER_FIRE:
       console.log('state: ', state);
