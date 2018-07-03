@@ -14,6 +14,14 @@ const compAvailableShots = ((n) => {
   return shotArray;
 })(8);
 
+/**
+* Takes a board-like object (array of arrays of 'W', 'H', 'M', etc) and returns a deep copy of it
+*/
+const cloneBoard = board => board.reduce((acc, e) => {
+  acc.push([...e]);
+  return acc;
+}, []);
+
 console.log('playerboard: ', playerBoard);
 
 const initialState = {
