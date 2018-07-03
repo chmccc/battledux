@@ -1,6 +1,6 @@
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"name" char(25) NOT NULL,
+	"name" varchar NOT NULL,
 	"wins" int NOT NULL DEFAULT '0',
 	"losses" int NOT NULL DEFAULT '0',
 	"ships_sunk" int NOT NULL DEFAULT '0',
