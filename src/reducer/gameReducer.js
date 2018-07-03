@@ -1,7 +1,7 @@
 import * as actionType from '../actions/actionTypes';
-import randomizedBoard from './randomBoard';
+// import randomizedBoard from './randomBoard';
 
-const initialState = randomizedBoard;
+// const initialState = randomizedBoard;
 
 const gameReducer = (state = 0, action) => {
   switch (action.type) {
