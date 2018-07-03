@@ -1,0 +1,15 @@
+.fleet {
+  padding-left: 10px; 
+}
+.wrapper {
+  padding-left: 5px;
+  white-space: nowrap;
+}
+.wrapper div {
+	display: inline-block;
+  height: 10px;
+  width: 10px;
+  background: green;
+  text-align: left;
+  border: 1px solid black;
+}

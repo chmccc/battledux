@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { playerFire } from '../actions/actions';
 import Counter from './Counter';
+import Ducks from './Ducks';
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
           this.props.dispatch(playerFire());
         }}>FIRE</button>
         <Counter />
+        <Ducks />
       </div>
     );
   }
