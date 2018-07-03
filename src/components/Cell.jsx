@@ -32,7 +32,7 @@ const Cell = props => {
   // it is a 'cell' class and one of the above...for cell coloring
   let classnameText = "cell " + cellClass;
   return (
-    <button id={props.coord} className={classnameText} onClick={props.updateState}></button>
+    <button id={props.coord} className={classnameText} onClick={props.handleCellClick}></button>
   )
 }
 

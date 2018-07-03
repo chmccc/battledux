@@ -54,14 +54,12 @@ const Grid = props => {
       }
 
 
-
-
-
-
-      cells.push(<Cell id={col+"-"+row} key={col+"-"+row} cellCode={cellCode} />)
+      // The cells are positioned from left to rigth and then up to down...
+      // So, the coordinates start are (col,row);
+      cells.push(<Cell coord={col+"-"+row} key={col+"-"+row} cellCode={cellCode} handleCellClick={props.handleCellClick}/>)
     }
   }
-  console.log(cells);
+  // console.log(cells);
   return (
     <div className="pond-grid">
       {cells}
