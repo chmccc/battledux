@@ -32,18 +32,25 @@ class App extends Component {
     console.log("check this === ", this.props);
     return (
       <div className="container">
+        <table>
+          <tr>
+            <th>
+              <button id="fire" onClick={(e) => {
+                e.preventDefault();
+                // this.props.dispatch(playerFire());
+                // this.props.playerFire("hello");
+                // this.props.compFire("hello HAL");
+              }}>FIRE</button>
+            </th>
+            <th>
+              <Ducks duckHealth={this.props.userDuckHealth} />
+            </th>
+          </tr>
+        </table>
         <div id="grids-container">
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
-        App Component<br/>
-        <button id="fire" onClick={(e) => {
-          e.preventDefault();
-          // this.props.dispatch(playerFire());
-          // this.props.playerFire("hello");
-          // this.props.compFire("hello HAL");
-        }}>FIRE</button>
-      <Ducks />
       </div>
     );
   }
