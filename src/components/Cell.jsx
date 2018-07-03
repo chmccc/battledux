@@ -3,23 +3,25 @@ import React, { Component } from "react";
 
 const Cell = props => {
   let cellClass;
+
+  // set the class so that our CSS can color the square correctly
   switch (props.cellCode){
-    case 'w':
+    case 'W':
       cellClass = 'water';
       break;
-    case 'h':
+    case 'H':
       cellClass = 'hit';
       break;
-    case 'm':
+    case 'M':
       cellClass = 'miss';
       break;
-    case 'd':
-      cellClass = 'duck'; // TODO
+    case 'D':
+      cellClass = 'duck';
       break;
-    case 'b':
+    case 'G':
       cellClass = 'battleship'; // TODO
       break;
-    case 's':
+    case 'B':
       cellClass = 'sub';// TODO
       break;
     default:
