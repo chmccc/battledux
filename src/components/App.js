@@ -27,7 +27,7 @@ class App extends Component {
               }}>FIRE</button>
             </th>
             <th>
-              <Ducks />
+              <Ducks duckHealth={this.props.userDuckHealth}/>
             </th>
           </tr>
         </table>
@@ -37,14 +37,15 @@ class App extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(playerFire, dispatch) }
+  return { actions: bindActionCreators(playerFire, dispatch) };
 }
 
 function mapStateToProps(store) {
   return {
     playerBoard: store.gameReducer.playerBoard,
     compBoard: store.gameReducer.compBoard,
-  }
+    userDuckHealth: store.gameReducer.userDuckHealth,
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

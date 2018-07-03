@@ -36,7 +36,7 @@ const initialState = {
   },
   userName: 'Admiral',
   currentPlayer: 'player',
-}
+};
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
