@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import Ducks from './Ducks';
 // import { playerFire } from '../actions/actions';
 import * as actionCreators from '../actions/actions';
+
 import Grid from './Grid.jsx';
 
 class App extends Component {
@@ -35,22 +36,14 @@ class App extends Component {
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
-        App Component<br />
-        <table>
-          <tr>
-            <th>
-              <button id="fire" onClick={(e) => {
-                e.preventDefault();
-                // this.props.dispatch(playerFire());
-                // this.props.playerFire("hello");
-                // this.props.compFire("hello HAL");
-              }}>FIRE</button>
-            </th>
-            <th>
-              <Ducks duckHealth={this.props.userDuckHealth} />
-            </th>
-          </tr>
-        </table>
+        App Component<br/>
+        <button id="fire" onClick={(e) => {
+          e.preventDefault();
+          // this.props.dispatch(playerFire());
+          // this.props.playerFire("hello");
+          // this.props.compFire("hello HAL");
+        }}>FIRE</button>
+      <Ducks />
       </div>
     );
   }
