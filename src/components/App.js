@@ -13,8 +13,8 @@ class App extends Component {
     return (
       <div className="container">
         <div id="grids-container">
-          <div id="player-grid"><Grid /></div>
-          <div id="cpu-grid"><Grid /></div>
+          <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false}/></div>
+          <div id="cpu-grid"><Grid shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true}/></div>
         </div>
         App Component<br/>
         <button id="fire" onClick={(e) => {
