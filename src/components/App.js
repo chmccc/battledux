@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { playerFire } from '../actions/actions';
-import Counter from './Counter';
 import Grid from './Grid.jsx';
 
 class App extends Component {
@@ -10,6 +9,7 @@ class App extends Component {
     super(props);
   }
   render() {
+    console.log(this.props);
     return (
       <div className="container">
         <div id="grids-container">
@@ -21,7 +21,6 @@ class App extends Component {
           e.preventDefault();
           this.props.dispatch(playerFire());
         }}>FIRE</button>
-        <Counter />
       </div>
     );
   }
@@ -31,4 +30,11 @@ function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(playerFire, dispatch) }
 }
 
-export default connect(mapDispatchToProps)(App);
+function mapStateToProps(store) {
+  return {
+    playerBoard: store.gameReducer.playerBoard,
+    compBoard: store.gameReducer.compBoard,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
