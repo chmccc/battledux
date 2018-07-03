@@ -1,8 +1,16 @@
 import * as actionTypes from './actionTypes';
 
-export function playerFire() {
+export function playerFire(coord) {
   return {
     type: actionTypes.PLAYER_FIRE,
-    payload: 1,
+    payload: coord,
   };
 };
+
+
+export function compFire() {
+  return {
+    type: actionTypes.COMP_FIRE,
+    payload: null,
+  }
+}
