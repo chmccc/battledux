@@ -1,5 +1,4 @@
 import * as actionType from '../actions/actionTypes';
-
 import {} from './gameLogic';
 
 import createBoard from './randomBoard';
@@ -41,7 +40,7 @@ const initialState = {
   },
   userName: 'Admiral',
   currentPlayer: 'player',
-}
+};
 
 const gameReducer = (state = initialState, action) => {
   console.log("action.type: ", action.type);
