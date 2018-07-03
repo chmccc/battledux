@@ -1,9 +1,19 @@
 import * as actionType from '../actions/actionTypes';
-// import randomizedBoard from './randomBoard';
 
-// const initialState = randomizedBoard;
+import createBoard from './randomBoard';
 
-const gameReducer = (state = 0, action) => {
+const playerBoard = createBoard();
+const compBoard = createBoard();
+
+
+console.log('playerboard: ', playerBoard);
+
+const initialState = {
+  playerBoard,
+  compBoard,
+}
+
+const gameReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.PLAYER_FIRE:
       console.log('state: ', state);

@@ -1,0 +1,66 @@
+/* button{
+  border: 1px grey;
+  color: white;
+  padding: 0px 0px;
+} */
+
+
+#grids-container{
+  display:grid;
+  width:1000px;
+  height:600px;
+  /* grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]; */
+  grid-template-columns: 5fr 40fr 10fr 40fr 5fr;
+  grid-template-rows: 15fr 80fr 15fr;
+  border:1px solid red; 
+}
+
+#player-grid{
+  grid-column: 2;
+  grid-row: 2;
+}
+#cpu-grid{
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.pond-grid{
+  width: 400px;
+  height: 400px;
+  display:grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+
+.cell {
+  width: 50px;
+  height: 50px;
+
+  margin: auto;
+
+  border: 1px solid grey;
+  /* text-align: center; */
+  text-decoration: none;
+  
+  cursor: pointer;
+}
+
+.water {
+  background-color: blue;
+}
+.hit {
+  background-color: red;
+}
+.miss {
+  background-color: grey;
+}
+
+.duck{  /* TODO */
+  background-color: yellow;
+}
+.battleship{  /* TODO */
+  background-color: goldenrod;
+}
+.sub{  /* TODO */
+  background-color: yellowgreen;
+}
