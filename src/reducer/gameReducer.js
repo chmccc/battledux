@@ -1,5 +1,7 @@
 import * as actionType from '../actions/actionTypes';
+
 import {} from './gameLogic';
+
 import createBoard from './randomBoard';
 // import { Object } from 'core-js';
 
@@ -15,7 +17,9 @@ const compAvailableShots = ((n) => {
   return shotArray;
 })(8);
 
+
 // console.log('playerboard: ', playerBoard);
+
 
 const initialState = {
   playerBoard,

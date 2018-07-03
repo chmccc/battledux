@@ -90,3 +90,4 @@ const verifyDucksBoard = (board) => {
 };
 
 export default createBoard;
+

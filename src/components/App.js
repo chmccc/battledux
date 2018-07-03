@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+
+import Ducks from './Ducks';
+
+
 // import { playerFire } from '../actions/actions';
 import * as actionCreators from '../actions/actions';
+
 import Grid from './Grid.jsx';
+
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +48,7 @@ class App extends Component {
           // this.props.playerFire("hello");
           // this.props.compFire("hello HAL");
         }}>FIRE</button>
+      <Ducks />
       </div>
     );
   }
