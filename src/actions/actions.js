@@ -7,10 +7,10 @@ export function playerFire(coord) {
   };
 };
 
-export function compFire(coord) {
+
+export function compFire() {
   return {
     type: actionTypes.COMP_FIRE,
-    payload: coord,
-  };
-};
-
+    payload: null,
+  }
+}
