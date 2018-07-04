@@ -81,12 +81,7 @@ const createDucksBoard = (n = 8, numGeese = 1, numDucks = 1, numDucklings = 1) =
 const createBoard = () => {
   const ducksBoard = createDucksBoard();
   const hitsAndMissesBoard = createHitMissBoard();
-  return {ducksBoard, hitsAndMissesBoard};
+  return { ducksBoard, hitsAndMissesBoard };
 }
-const verifyDucksBoard = (board) => {
-  // board.reduce(acc, e => acc.concat(e), []).reduce((acc, e) => {
-
-  // })
-};
 
 export default createBoard;

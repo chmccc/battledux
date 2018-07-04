@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import Ducks from './Ducks';
 // import { playerFire } from '../actions/actions';
 import * as actionCreators from '../actions/actions';
-
 import Grid from './Grid.jsx';
 
 class App extends Component {
