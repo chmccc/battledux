@@ -15,25 +15,25 @@ class App extends Component {
   }
 
   handleLogin(e) {
-    console.log("hello");
-    console.log("hello ", document.getElementById('username').value);
+    // console.log("hello");
+    // console.log("hello ", document.getElementById('username').value);
     // this.props.login(document.getElementById('username').value);
   }
 
 
   handleCellClick(e) {
-    console.log(e.target.id); // this is the coordinate col-row
+    // console.log(e.target.id); // this is the coordinate col-row
     let coords = e.target.id.split('-')
     let col = coords[0];
     let row = coords[1];
-    console.log(col, row);
+    // console.log(col, row);
 
     // now check to see if we hit the computer!
     this.props.playerFire({ col, row });
   }
 
   render() {
-    console.log("check this === ", this.props);
+    // console.log("check this === ", this.props);
     return (
       <div className="container">
         <div id="grids-container">
@@ -46,14 +46,11 @@ class App extends Component {
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
+        <button onClick={this.props.compFire}>COMP FIRE</button>
       </div>
     );
   }
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return { actions: bindActionCreators(playerFire, dispatch) }
-// }
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -62,9 +59,6 @@ function mapDispatchToProps(dispatch) {
     // login: bindActionCreators(actionCreators.login, dispatch),
   }
 }
-
-
-
 
 function mapStateToProps(store) {
   return {
