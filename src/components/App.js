@@ -18,7 +18,7 @@ class App extends Component {
   handleLogin(e) {
     console.log("hello");
     console.log("hello ", document.getElementById('username').value);
-    // this.props.login(document.getElementById('username').value);
+    this.props.login(document.getElementById('username').value);
   }
 
 
@@ -60,7 +60,7 @@ function mapDispatchToProps(dispatch) {
   return {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
-    // login: bindActionCreators(actionCreators.login, dispatch),
+    login: bindActionCreators(actionCreators.login, dispatch),
   }
 }
 
