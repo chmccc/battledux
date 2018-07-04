@@ -11,17 +11,32 @@
   height:600px;
   /* grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]; */
   grid-template-columns: 5fr 40fr 10fr 40fr 5fr;
-  grid-template-rows: 15fr 80fr 15fr;
+  grid-template-rows: 10fr 10fr 70fr 10fr;
   border:1px solid red; 
 }
 
+
+#login-area{
+  grid-column:2;
+  grid-row:1;
+}
+
+#player-duck-counter{
+  grid-column: 2;
+  grid-row: 2;
+}
 #player-grid{
   grid-column: 2;
+  grid-row: 3;
+}
+
+#comp-duck-counter{
+  grid-column: 4;
   grid-row: 2;
 }
 #cpu-grid{
   grid-column: 4;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .pond-grid{
@@ -55,12 +70,40 @@
   background-color: grey;
 }
 
-.duck{  /* TODO */
+.duck {
   background-color: yellow;
 }
-.battleship{  /* TODO */
+.goose {
   background-color: goldenrod;
 }
-.sub{  /* TODO */
+.baby {
   background-color: yellowgreen;
+}
+
+
+
+
+/* For the Duck counter */
+
+.fleet {
+  padding-left: 10px; 
+}
+.lifeBoxes {
+  padding-left: 5px;
+  white-space: nowrap;
+}
+.lifeBoxes div {
+	display: inline-block;
+  height: 10px;
+  width: 10px;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.on {
+  background-color: green;
+}
+
+.off {
+  background-color: red;
 }
