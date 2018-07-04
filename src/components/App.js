@@ -12,6 +12,13 @@ class App extends Component {
     super(props);
 
     this.handleCellClick = this.handleCellClick.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(e) {
+    console.log("hello");
+    console.log("hello ", document.getElementById('username').value);
+    // this.props.login(document.getElementById('username').value);
   }
 
 
@@ -24,8 +31,6 @@ class App extends Component {
 
     // now check to see if we hit the computer!
     this.props.playerFire({ col, row });
-
-    console.log("handleCellClick!!!");
   }
 
   render() {
@@ -33,6 +38,10 @@ class App extends Component {
     return (
       <div className="container">
         <div id="grids-container">
+          <div id="login-area">
+            <input id="username" type="text" placeholder="name please"></input>
+            <button onClick={this.handleLogin}>Start Game</button>
+          </div>
           <div id="player-duck-counter"><Ducks duckHealth={this.props.userDuckHealth} /></div>
           <div id="comp-duck-counter"><Ducks duckHealth={this.props.compDuckHealth} /></div>
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
@@ -51,6 +60,7 @@ function mapDispatchToProps(dispatch) {
   return {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
+    // login: bindActionCreators(actionCreators.login, dispatch),
   }
 }
 
