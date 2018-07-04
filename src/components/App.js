@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Ducks from './Ducks';
+import Ducks from './Ducks.jsx';
+import UserInfo from './userInfo.jsx';
 // import { playerFire } from '../actions/actions';
 import * as actionCreators from '../actions/actions';
 
@@ -35,6 +36,7 @@ class App extends Component {
         <div id="grids-container">
           <div id="player-duck-counter"><Ducks duckHealth={this.props.userDuckHealth} /></div>
           <div id="comp-duck-counter"><Ducks duckHealth={this.props.compDuckHealth} /></div>
+          <div id="user-info"><UserInfo /></div>
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
