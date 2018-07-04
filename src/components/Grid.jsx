@@ -43,8 +43,8 @@ const Grid = props => {
       // TODO:: need to update this based on real data
 
       // First show the ship...if it's not the CPU
-      // if ( !cpu && shipsArr[row][col] !== 'W') {
-      if ( shipsArr[row][col] !== 'W') { // just show for now so we can easily play test
+      if ( !cpu && shipsArr[row][col] !== 'W') {
+      // if ( shipsArr[row][col] !== 'W') { // just show for now so we can easily play test
         cellCode = shipsArr[row][col]; // if it's a non hit ship location...show the ship
       }
 

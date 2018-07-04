@@ -49,29 +49,40 @@ const gameReducer = (state = initialState, action) => {
 
       // Check to see if we hit any of the opponent's ships
       // It will also update the objects that we pass it!
-      let ducksBoard = cloneBoard([...state.playerBoard.ducksBoard]);
-      let hitsAndMissesBoard = cloneBoard([...state.playerBoard.hitsAndMissesBoard]);
+      let ducksBoard = cloneBoard([...state.compBoard.ducksBoard]);
+      let hitsAndMissesBoard = cloneBoard([...state.compBoard.hitsAndMissesBoard]);
       let compDuckHealth = {...state.compDuckHealth};
       let hit = checkHit(action.payload['col'], action.payload['row'], ducksBoard, hitsAndMissesBoard, compDuckHealth )
       
-      console.log('comparing clones');
-      console.log(ducksBoard === state.playerBoard.ducksBoard)
 
       console.log(`hit: ${hit}`);
 
       // TODO:: update the stats
       let playerStats = {...state.playerStats}
       if (hit) {
-        pStats.shots+=1;
-        pStats.hit+=1;
+        playerStats.shots+=1;
+        playerStats.hit+=1;
       }
 
-      return { compDuckHealth, playerBoard:{ducksBoard, hitsAndMissesBoard}, playerStats };
+      const newState = { compDuckHealth, compBoard:{ducksBoard, hitsAndMissesBoard}, playerStats };
+
+      ducksBoard = cloneBoard([...state.playerBoard.ducksBoard]);
+      hitsAndMissesBoard = cloneBoard([...state.playerBoard.hitsAndMissesBoard]);
+      let compAvailableShots = cloneBoard([...state.compAvailableShots]);
+
+      newState['playerBoard'] = {ducksBoard, hitsAndMissesBoard};
+      newState['compAvailableShots'] = compAvailableShots
+      newState['userDuckHealth'] = Object.assign({}, state.userDuckHealth);
+      newState['userName'] = state.userName;
+      newState['currentPlayer'] = state.currentPlayer;
+
+      return newState;
 
     case actionType.COMP_FIRE:      
       
       console.log('action.payload: ', action.payload);
-      return Object.assign({}, state);
+      
+      return
 
       // do some stuff with PURE FUNCTIONS ONLY
         // this is also where we check for sunk ducks
@@ -84,6 +95,7 @@ const gameReducer = (state = initialState, action) => {
         // check for sunk ducks
     case actionType.END_GAME:
       // save, win, or lose, we gotta update the DB
+      return;
     default:
       return state;
   }

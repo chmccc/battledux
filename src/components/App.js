@@ -35,14 +35,6 @@ class App extends Component {
         <table>
           <tr>
             <th>
-              <button id="fire" onClick={(e) => {
-                e.preventDefault();
-                // this.props.dispatch(playerFire());
-                // this.props.playerFire("hello");
-                // this.props.compFire("hello HAL");
-              }}>FIRE</button>
-            </th>
-            <th>
               <Ducks duckHealth={this.props.userDuckHealth} />
             </th>
           </tr>
