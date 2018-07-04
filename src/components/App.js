@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { playerFire } from '../actions/actions';
+import { compFire } from '../actions/actions';
 import Grid from './Grid.jsx';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
         App Component<br/>
         <button id="fire" onClick={(e) => {
           e.preventDefault();
-          this.props.dispatch(playerFire());
+          this.props.dispatch(compFire());
         }}>FIRE</button>
       </div>
     );
@@ -27,7 +27,7 @@ class App extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(playerFire, dispatch) }
+  return { actions: bindActionCreators(compFire, dispatch) }
 }
 
 function mapStateToProps(store) {
