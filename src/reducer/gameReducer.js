@@ -1,5 +1,5 @@
 import * as actionType from '../actions/actionTypes';
-// import {} from './gameLogic';
+import { chooseFireLocation, takeShot } from './gameLogic';
 import createBoard from './randomBoard';
 // import { Object } from 'core-js';
 
@@ -14,10 +14,24 @@ const compAvailableShots = ((n) => {
   }
   return shotArray;
 })(8);
+/**
+* Deep clones the availableShots array and splices out the item at the provided index
+*/
+const cloneAndSplice = (array, index) => {
+  const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    if (i !== index) newArray.push([...array[i]]);
+  }
+  return newArray;
+};
 
+/** Takes a board-like object (array of arrays of 'W', 'H', 'M', etc) and returns a deep copy of it */
+const cloneBoard = board => board.reduce((acc, e) => {
+  acc.push([...e]);
+  return acc;
+}, []);
 
-// console.log('playerboard: ', playerBoard);
-
+console.log('playerboard: ', playerBoard);
 
 const initialState = {
   playerBoard,
@@ -45,8 +59,6 @@ const gameReducer = (state = initialState, action) => {
   console.log("action.type: ", action.type);
   switch (action.type) {
     case actionType.PLAYER_FIRE:
-      console.log('action.payload: ', action.payload);
-
       // Check to see if we hit any of the opponent's ships
       // It will also update the objects that we pass it!
       let ducksBoard = cloneBoard([...state.compBoard.ducksBoard]);
@@ -78,21 +90,26 @@ const gameReducer = (state = initialState, action) => {
 
       return newState;
 
-    case actionType.COMP_FIRE:      
-      
-      console.log('action.payload: ', action.payload);
-      
-      return
-
-      // do some stuff with PURE FUNCTIONS ONLY
-        // this is also where we check for sunk ducks
-      // return state + action.payload;
-
-      // how do we trigger this??
-      // do some stuff with PURE FUNCTIONS ONLY
-        // randomly pick a place to fire
-        // this is where we remove the last shot from available shots
-        // check for sunk ducks
+    case actionType.COMP_FIRE:
+      const shotIndex = chooseFireLocation(
+        cloneBoard(state.compBoard.hitsAndMissesBoard),
+        state.compAvailableShots,
+        null, // TODO: add targeting logic
+      );
+      const [x, y] = state.compAvailableShots[shotIndex];
+      const newCompAvailableShots = cloneAndSplice(state.compAvailableShots, shotIndex);
+      let newHitsAndMissesBoard = cloneBoard(state.playerBoard.hitsAndMissesBoard);
+      const result = takeShot(newHitsAndMissesBoard, state.playerBoard.ducksBoard, x, y);
+      newHitsAndMissesBoard = result.hitsBoard;
+      console.log(result);
+      const newUserDuckHealth = { ...state.userDuckHealth };
+      if (result.hit) newUserDuckHealth[result.target]--;      }
+      const newPlayerBoard = { ...state.playerBoard, hitsAndMissesBoard: newHitsAndMissesBoard,  }
+      return { ...state,
+        playerBoard: newPlayerBoard,
+        compAvailableShots: newCompAvailableShots,
+        userDuckHealth: newUserDuckHealth,
+      }
     case actionType.END_GAME:
       // save, win, or lose, we gotta update the DB
       return;
@@ -136,14 +153,5 @@ const checkHit = (col, row, dBoard, hmBoard, health) => {
 
   return hit;
 }
-
-/**
-* Takes a board-like object (array of arrays of 'W', 'H', 'M', etc) and returns a deep copy of it
-*/
-const cloneBoard = board => board.reduce((acc, e) => {
-  acc.push([...e]);
-  return acc;
-}, []);
-
 
 export default gameReducer;
