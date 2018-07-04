@@ -15,7 +15,9 @@ const compAvailableShots = ((n) => {
   return shotArray;
 })(8);
 
+
 // console.log('playerboard: ', playerBoard);
+
 
 const initialState = {
   playerBoard,
@@ -37,7 +39,7 @@ const initialState = {
   },
   userName: 'Admiral',
   currentPlayer: 'player',
-}
+};
 
 const gameReducer = (state = initialState, action) => {
   console.log("action.type: ", action.type);
