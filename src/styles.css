@@ -55,12 +55,40 @@
   background-color: grey;
 }
 
-.duck{  /* TODO */
+.duck {
   background-color: yellow;
 }
-.battleship{  /* TODO */
+.goose {
   background-color: goldenrod;
 }
-.sub{  /* TODO */
+.baby {
   background-color: yellowgreen;
+}
+
+
+
+
+/* For the Duck counter */
+
+.fleet {
+  padding-left: 10px; 
+}
+.lifeBoxes {
+  padding-left: 5px;
+  white-space: nowrap;
+}
+.lifeBoxes div {
+	display: inline-block;
+  height: 10px;
+  width: 10px;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.on {
+  background-color: green;
+}
+
+.off {
+  background-color: red;
 }

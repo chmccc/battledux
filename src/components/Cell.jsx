@@ -19,10 +19,10 @@ const Cell = props => {
       cellClass = 'duck';
       break;
     case 'G':
-      cellClass = 'battleship'; // TODO
+      cellClass = 'goose';
       break;
     case 'B':
-      cellClass = 'sub';// TODO
+      cellClass = 'baby';// TODO
       break;
     default:
       cellClass = 'water';
