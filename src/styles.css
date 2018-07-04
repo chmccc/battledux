@@ -15,9 +15,18 @@
   border:1px solid red; 
 }
 
+#player-duck-counter{
+  grid-column: 2;
+  grid-row: 1;
+}
 #player-grid{
   grid-column: 2;
   grid-row: 2;
+}
+
+#comp-duck-counter{
+  grid-column: 4;
+  grid-row: 1;
 }
 #cpu-grid{
   grid-column: 4;
