@@ -32,4 +32,39 @@ function takeShot(hitsBoard, playerDucksBoard, x, y) {
   return data;
 }
 
-export { chooseFireLocation, takeShot };
+/**
+ * Updates the board
+ * @param {string} col : '1' 
+ * @param {string} row : '7'
+ * @param {Array of Arrays} dBoard : value is string  
+ * @param {Array of Arrays} hmBoard  : value is string
+ * @param {Obj} health 
+ * @param {Obj} stats 
+ */
+const checkHit = (col, row, dBoard, hmBoard, health) => {
+  let hit;
+  let boardVal = dBoard[row][col];
+  if ( boardVal !== 'W' ) { //it's a HIT
+    hit=true;
+    hmBoard[row][col] = 'H';
+
+    if( boardVal === 'G'){
+      health.goose -= 1;
+      if (health.goose < 0) health.goose = 0;
+    } else if (boardVal==='D') {
+      health.duck -= 1;
+      if (health.duck < 0) health.duck = 0;
+    } else if (boardVal==='B') {
+      health.duckling -= 1;
+      if (health.duckling < 0) health.duckling = 0;
+    }
+
+  } else {
+    hit=false;
+    hmBoard[row][col] = 'M';
+  }
+
+  return hit;
+}
+
+export { chooseFireLocation, takeShot, checkHit };
