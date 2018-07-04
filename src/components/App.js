@@ -32,14 +32,9 @@ class App extends Component {
     console.log("check this === ", this.props);
     return (
       <div className="container">
-        <table>
-          <tr>
-            <th>
-              <Ducks duckHealth={this.props.userDuckHealth} />
-            </th>
-          </tr>
-        </table>
         <div id="grids-container">
+          <div id="player-duck-counter"><Ducks duckHealth={this.props.userDuckHealth} /></div>
+          <div id="comp-duck-counter"><Ducks duckHealth={this.props.compDuckHealth} /></div>
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
@@ -56,7 +51,7 @@ function mapDispatchToProps(dispatch) {
   return {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
-   }
+  }
 }
 
 
@@ -67,6 +62,7 @@ function mapStateToProps(store) {
     playerBoard: store.gameReducer.playerBoard,
     compBoard: store.gameReducer.compBoard,
     userDuckHealth: store.gameReducer.userDuckHealth,
+    compDuckHealth: store.gameReducer.compDuckHealth,
   };
 }
 
