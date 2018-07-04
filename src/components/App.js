@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Ducks from './Ducks';
+import Ducks from './Ducks.jsx';
+import UserInfo from './userInfo.jsx';
 // import { playerFire } from '../actions/actions';
 import * as actionCreators from '../actions/actions';
-
 import Grid from './Grid.jsx';
 
 class App extends Component {
@@ -23,18 +23,18 @@ class App extends Component {
 
 
   handleCellClick(e) {
-    console.log(e.target.id); // this is the coordinate col-row
+    // console.log(e.target.id); // this is the coordinate col-row
     let coords = e.target.id.split('-')
     let col = coords[0];
     let row = coords[1];
-    console.log(col, row);
+    // console.log(col, row);
 
     // now check to see if we hit the computer!
     this.props.playerFire({ col, row });
   }
 
   render() {
-    console.log("check this === ", this.props);
+    // console.log("check this === ", this.props);
     return (
       <div className="container">
         <div id="grids-container">
@@ -44,17 +44,15 @@ class App extends Component {
           </div>
           <div id="player-duck-counter"><Ducks duckHealth={this.props.userDuckHealth} /></div>
           <div id="comp-duck-counter"><Ducks duckHealth={this.props.compDuckHealth} /></div>
+          <div id="user-info"><UserInfo shots={10} hits={5}/></div>
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
+        <button onClick={this.props.compFire}>COMP FIRE</button>
       </div>
     );
   }
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return { actions: bindActionCreators(playerFire, dispatch) }
-// }
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -63,9 +61,6 @@ function mapDispatchToProps(dispatch) {
     login: bindActionCreators(actionCreators.login, dispatch),
   }
 }
-
-
-
 
 function mapStateToProps(store) {
   return {
