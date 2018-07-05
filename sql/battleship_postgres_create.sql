@@ -22,7 +22,7 @@ CREATE TABLE "game" (
 	"num_hits" int NOT NULL DEFAULT '0',
 	"num_ships_user_sunk" int NOT NULL DEFAULT '0',
 	"num_ships_comp_sunk" int NOT NULL DEFAULT '0',
-	"date_created" DATE NOT NULL,
+	"date_created" TIMESTAMP NOT NULL,
 	CONSTRAINT game_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
