@@ -38,8 +38,8 @@ export function login(data){
 
 
 export function loadBoard(datafromDB) {
-  return{
-    type: actionTypes.LOAD_BOARD,
-    payload: datafromDB
-  }
+  // return{
+  //   type: actionTypes.LOAD_BOARD,
+  //   payload: datafromDB
+  // }
 }
