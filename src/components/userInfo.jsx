@@ -3,6 +3,10 @@ import React from 'react';
 const UserInfo = (props) => {
 
   let accuracy = props.hits / props.shots * 100;
+  let accuracyFixed = accuracy.toFixed(2);
+  if (props.shots === 0) {
+    accuracyFixed = 0;
+  }
 
   return (
     <div>
@@ -14,7 +18,7 @@ const UserInfo = (props) => {
         shots: {props.shots}
       </div>
       <div>
-        accuracy: {accuracy}%
+        accuracy: {accuracyFixed}%
       </div>
     </div>
   );
