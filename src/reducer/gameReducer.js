@@ -53,7 +53,7 @@ const initialState = {
   userName: 'Admiral',
   currentPlayer: 'player',
 };
-let myVar;
+
 const gameReducer = (state = initialState, action) => {
   console.log("action: ", action);
   console.log("state: ", state);
@@ -73,8 +73,10 @@ const gameReducer = (state = initialState, action) => {
       // TODO:: update the stats
       let playerStats = {...state.playerStats}
       if (hit) {
+        playerStats.hits+=1;
         playerStats.shots+=1;
-        playerStats.hit+=1;
+      } else {
+        playerStats.shots+=1;
       }
 
       const newState = { compDuckHealth, compBoard:{ducksBoard, hitsAndMissesBoard}, playerStats };
@@ -87,9 +89,7 @@ const gameReducer = (state = initialState, action) => {
       newState['compAvailableShots'] = compAvailableShots
       newState['userDuckHealth'] = Object.assign({}, state.userDuckHealth);
       newState['userName'] = state.userName;
-      newState['currentPlayer'] = state.currentPlayer;
-
-      // myVar = setTimeout(function(){ gameReducer(state = initialState, action);}, 2000);
+      newState['currentPlayer'] = 'comp';
 
       return newState;
 
@@ -114,6 +114,7 @@ const gameReducer = (state = initialState, action) => {
         playerBoard: newPlayerBoard,
         compAvailableShots: newCompAvailableShots,
         userDuckHealth: newUserDuckHealth,
+        currentPlayer: 'player',
       };
       
     default:
