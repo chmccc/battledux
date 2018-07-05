@@ -71,8 +71,10 @@ const gameReducer = (state = initialState, action) => {
       // TODO:: update the stats
       let playerStats = {...state.playerStats}
       if (hit) {
+        playerStats.hits+=1;
         playerStats.shots+=1;
-        playerStats.hit+=1;
+      } else {
+        playerStats.shots+=1;
       }
 
       const newState = { compDuckHealth, compBoard:{ducksBoard, hitsAndMissesBoard}, playerStats };
