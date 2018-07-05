@@ -45,6 +45,11 @@ const checkHit = (col, row, dBoard, hmBoard, health) => {
   let hit;
   let boardVal = dBoard[row][col];
   if ( boardVal !== 'W' ) { //it's a HIT
+
+   // make sure that we didn't hit something that we already hit before
+   if (hmBoard[row][col] === 'H'){
+    hit=false;
+   } else {    
     hit=true;
     hmBoard[row][col] = 'H';
 
@@ -58,6 +63,8 @@ const checkHit = (col, row, dBoard, hmBoard, health) => {
       health.duckling -= 1;
       if (health.duckling < 0) health.duckling = 0;
     }
+
+  }
 
   } else {
     hit=false;
