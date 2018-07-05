@@ -44,7 +44,7 @@ class App extends Component {
           </div>
           <div id="player-duck-counter"><Ducks duckHealth={this.props.userDuckHealth} /></div>
           <div id="comp-duck-counter"><Ducks duckHealth={this.props.compDuckHealth} /></div>
-          <div id="user-info"><UserInfo shots={10} hits={5}/></div>
+          <div id="user-info"><UserInfo shots={this.props.userShots}/></div>
           <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
           <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
         </div>
@@ -59,7 +59,7 @@ function mapDispatchToProps(dispatch) {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
     login: bindActionCreators(actionCreators.login, dispatch),
-  }
+  };
 }
 
 function mapStateToProps(store) {
@@ -68,6 +68,7 @@ function mapStateToProps(store) {
     compBoard: store.gameReducer.compBoard,
     userDuckHealth: store.gameReducer.userDuckHealth,
     compDuckHealth: store.gameReducer.compDuckHealth,
+    userShots: store.gameReducer.playerStats,
   };
 }
 

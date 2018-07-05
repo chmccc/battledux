@@ -53,9 +53,11 @@ const initialState = {
   userName: 'Admiral',
   currentPlayer: 'player',
 };
-
+let myVar;
 const gameReducer = (state = initialState, action) => {
-  console.log("action.type: ", action.type);
+  console.log("action: ", action);
+  console.log("state: ", state);
+  console.log("initialSate: ", initialState);
   switch (action.type) {
     case actionType.PLAYER_FIRE:
       // Check to see if we hit any of the opponent's ships
@@ -86,6 +88,8 @@ const gameReducer = (state = initialState, action) => {
       newState['userDuckHealth'] = Object.assign({}, state.userDuckHealth);
       newState['userName'] = state.userName;
       newState['currentPlayer'] = state.currentPlayer;
+
+      // myVar = setTimeout(function(){ gameReducer(state = initialState, action);}, 2000);
 
       return newState;
 
