@@ -55,7 +55,9 @@ const initialState = {
 };
 
 const gameReducer = (state = initialState, action) => {
-  console.log("action.type: ", action.type);
+  console.log("action: ", action);
+  console.log("state: ", state);
+  console.log("initialSate: ", initialState);
   switch (action.type) {
     case actionType.PLAYER_FIRE:
       // Check to see if we hit any of the opponent's ships
@@ -87,7 +89,7 @@ const gameReducer = (state = initialState, action) => {
       newState['compAvailableShots'] = compAvailableShots
       newState['userDuckHealth'] = Object.assign({}, state.userDuckHealth);
       newState['userName'] = state.userName;
-      newState['currentPlayer'] = state.currentPlayer;
+      newState['currentPlayer'] = 'comp';
 
       return newState;
 
@@ -112,6 +114,7 @@ const gameReducer = (state = initialState, action) => {
         playerBoard: newPlayerBoard,
         compAvailableShots: newCompAvailableShots,
         userDuckHealth: newUserDuckHealth,
+        currentPlayer: 'player',
       };
       
     default:
