@@ -13,7 +13,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/save', controller.saveGame);
+app.post('/create', controller.createGame);
+
+app.get('/load/:id', controller.loadGame);
+
+app.post('/update', controller.showGames);
 
 app.post('/login', controller.login);
 
