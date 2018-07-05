@@ -32,7 +32,7 @@ class App extends Component {
     // now check to see if we hit the computer!
     if (this.props.currentPlayer === 'player') {
       this.props.playerFire({ col, row });
-      setTimeout(this.props.compFire, 2000);
+      setTimeout(this.props.compFire, 1000);
     }
   }
 
@@ -54,7 +54,7 @@ class App extends Component {
           </div>
           <button onClick={this.props.compFire}>COMP FIRE</button>
         </div>
-        <MessageBox />
+        <MessageBox userDuckHealth={this.props.userDuckHealth} compDuckHealth={this.props.compDuckHealth} userName={this.props.userName}/>
       </div>
     );
   }
@@ -75,6 +75,7 @@ function mapStateToProps(store) {
     userDuckHealth: store.gameReducer.userDuckHealth,
     compDuckHealth: store.gameReducer.compDuckHealth,
     playerStats: store.gameReducer.playerStats,
+    userName: store.gameReducer.userName,
     currentPlayer: store.gameReducer.currentPlayer,
   };
 }
