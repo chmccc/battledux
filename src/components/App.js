@@ -51,7 +51,7 @@ class App extends Component {
           </div>
           <button onClick={this.props.compFire}>COMP FIRE</button>
         </div>
-        <MessageBox />
+        <MessageBox userDuckHealth={this.props.userDuckHealth} compDuckHealth={this.props.compDuckHealth} userName={this.props.userName}/>
       </div>
     );
   }
@@ -72,6 +72,7 @@ function mapStateToProps(store) {
     userDuckHealth: store.gameReducer.userDuckHealth,
     compDuckHealth: store.gameReducer.compDuckHealth,
     playerStats: store.gameReducer.playerStats,
+    userName: store.gameReducer.userName,
   };
 }
 
