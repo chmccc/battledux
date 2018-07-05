@@ -30,7 +30,10 @@ class App extends Component {
     // console.log(col, row);
 
     // now check to see if we hit the computer!
-    this.props.playerFire({ col, row });
+    if (this.props.currentPlayer === 'player') {
+      this.props.playerFire({ col, row });
+      setTimeout(this.props.compFire, 1000);
+    }
   }
 
   render() {
@@ -62,7 +65,7 @@ function mapDispatchToProps(dispatch) {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
     login: bindActionCreators(actionCreators.login, dispatch),
-  }
+  };
 }
 
 function mapStateToProps(store) {
@@ -73,6 +76,7 @@ function mapStateToProps(store) {
     compDuckHealth: store.gameReducer.compDuckHealth,
     playerStats: store.gameReducer.playerStats,
     userName: store.gameReducer.userName,
+    currentPlayer: store.gameReducer.currentPlayer,
   };
 }
 
