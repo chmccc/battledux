@@ -15,31 +15,50 @@ export function compFire() {
   }
 }
 
-export function login(data){
-  console.log("what is data?", data);
-  return dispatch => {
-    var configuration = {
+export function login(username) {
+  console.log("what is username?", username);
+  let status;
+  return (dispatch) => {
+    const configuration = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: data}),
+      body: JSON.stringify({ username }),
     }
     return fetch('http://localhost:5000/login', configuration)
       .then((res) => {
-        res.json()
-          .then((res2) => {
-            console.log(res2);
-            dispatch(loadBoard(res2))
-          })
+        console.log('STATUS CODE: ', res.status);
+        status = res.status
+        return res.json();
       })
+      .then((data) => {
+        console.log('FETCHED DATA: ', data);
+        if (status === 206) { // "206 Partial Content", means have user but no active games
+          dispatch(loadGame({ data: [], new: false, username, userID: data.userID }));
+        }
+        if (status === 200) { // found user and active game, expect game data...
+          dispatch(loadGame({ data, new: false, username, userID: data.user_id }));
+        } else if (status === 201) { // "201 Created", created new user
+          dispatch(loadGame({ data: [], new: true, username, userID: data.id }));
+        }
+      })
+      .catch(e => console.error(e));
   }
 }
 
+export function saveGame(first_time) {
 
-export function loadBoard(datafromDB) {
-  // return{
-  //   type: actionTypes.LOAD_BOARD,
-  //   payload: datafromDB
-  // }
+}
+
+export function loadGame(data) {
+  const hasSavedGame = !data.new && data.data.status === 'A';
+  const action = hasSavedGame ? {
+    type: actionTypes.LOAD_GAME,
+    payload: data,
+  } : {
+    type: actionTypes.NEW_GAME,
+    payload: data,
+  };
+  return action;
 }

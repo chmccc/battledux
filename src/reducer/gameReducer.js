@@ -1,10 +1,10 @@
 import * as actionType from '../actions/actionTypes';
 import { chooseFireLocation, takeShot, checkHit } from './gameLogic';
-import createBoard from './randomBoard';
+import { createBoard, createHitMissBoard } from './randomBoard';
 // import { Object } from 'core-js';
 
-const playerBoard = createBoard();
-const compBoard = createBoard();
+// const playerBoard = createBoard();
+// const compBoard = createBoard();
 const compAvailableShots = ((n) => {
   const shotArray = [];
   for (let x = 0; x < n; x++) {
@@ -33,8 +33,15 @@ const cloneBoard = board => board.reduce((acc, e) => {
 }, []);
 
 const initialState = {
-  playerBoard,
-  compBoard,
+  // dummy all-water boards for loading phase
+  playerBoard: {
+    hitsAndMissesBoard: createHitMissBoard(),
+    ducksBoard: createHitMissBoard(),
+  },
+  compBoard: {
+    hitsAndMissesBoard: createHitMissBoard(),
+    ducksBoard: createHitMissBoard(),
+  },
   playerStats: {
     shots: 0,
     hits: 0,
@@ -52,12 +59,11 @@ const initialState = {
   },
   userName: 'Admiral',
   currentPlayer: 'player',
+  everSaved: false,
+  userID: null,
 };
 
 const gameReducer = (state = initialState, action) => {
-  console.log("action: ", action);
-  console.log("state: ", state);
-  console.log("initialSate: ", initialState);
   switch (action.type) {
     case actionType.PLAYER_FIRE:
       // Check to see if we hit any of the opponent's ships
@@ -116,7 +122,20 @@ const gameReducer = (state = initialState, action) => {
         userDuckHealth: newUserDuckHealth,
         currentPlayer: 'player',
       };
+
+    case actionType.LOAD_GAME:
+      console.log('LOADING GAME... ', action.payload);
+      const playerData = JSON.parse(action.payload.data.user_board_state);
+      const compData = JSON.parse(action.payload.data.comp_board_state);
+      console.log('playerData: ', playerData);
+      console.log('compData: ', compData);
+      return {...state, userName: action.payload.username, userID: action.payload.userID };
       
+    case actionType.NEW_GAME:
+      console.log('CREATING NEW GAME... ', action.payload);
+      return { ...state, playerBoard: createBoard(), compBoard: createBoard(), userID: action.payload.userID, userName: action.payload.username }
+      
+    // case actionType.SAVE_GAME:
     default:
       return state;
   }

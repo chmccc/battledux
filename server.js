@@ -13,13 +13,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// 
+
+app.get('/users', controller.showUsers);
+
+app.get('/games', controller.showGames);
+
 app.post('/create', controller.createGame);
 
-app.get('/load/:id', controller.loadGame);
+app.get('/load/:userid', controller.loadGame);
 
 app.post('/update', controller.updateGame);
 
-app.post('/login', controller.login);
-
+app.post('/login', controller.login, controller.loadGame);
 
 app.listen(5000, () => console.log('Listening on port 5000!'));
