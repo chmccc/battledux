@@ -15,6 +15,10 @@ export function compFire() {
   }
 }
 
+export function create(data) {
+  console.log("in?....");
+}
+
 export function login(data){
   console.log("what is data?", data);
   return dispatch => {
@@ -23,7 +27,7 @@ export function login(data){
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: data}),
+      body: JSON.stringify({username: data}),   
     }
     return fetch('http://localhost:5000/login', configuration)
       .then((res) => {
