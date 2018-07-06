@@ -16,9 +16,13 @@ class App extends Component {
   }
 
   handleLogin(e) {
-    console.log("hello");
-    console.log("hello ", document.getElementById('username').value);
+    // console.log("hello");
+    // console.log("hello ", document.getElementById('username').value);
     this.props.login(document.getElementById('username').value);
+  }
+
+  handleCreate(e) {
+    this.props.create();
   }
 
 
@@ -51,8 +55,10 @@ class App extends Component {
             <div id="user-info"><UserInfo shots={this.props.playerStats.shots} hits={this.props.playerStats.hits}/></div>
             <div id="player-grid"><Grid shipsArr={this.props.playerBoard.ducksBoard} hitMissArr={this.props.playerBoard.hitsAndMissesBoard} cpu={false} /></div>
             <div id="cpu-grid"><Grid handleCellClick={this.handleCellClick} shipsArr={this.props.compBoard.ducksBoard} hitMissArr={this.props.compBoard.hitsAndMissesBoard} cpu={true} /></div>
+            <div id="save-btn">
+              <button onClick={this.handleCreate}>SAVE GAME</button>
+            </div>
           </div>
-          <button onClick={this.props.compFire}>COMP FIRE</button>
         </div>
         <MessageBox userDuckHealth={this.props.userDuckHealth} compDuckHealth={this.props.compDuckHealth} userName={this.props.userName}/>
       </div>
@@ -65,6 +71,7 @@ function mapDispatchToProps(dispatch) {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
     login: bindActionCreators(actionCreators.login, dispatch),
+    create: bindActionCreators(actionCreators.create, dispatch),
   };
 }
 
