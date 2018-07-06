@@ -1,5 +1,5 @@
 import * as actionType from '../actions/actionTypes';
-import { chooseFireLocation, takeShot, checkHit } from './gameLogic';
+import { chooseFireLocation, takeShot, checkHit, updateTargetingInfo } from './gameLogic';
 import { createBoard, createHitMissBoard } from './randomBoard';
 // import { Object } from 'core-js';
 
@@ -57,6 +57,10 @@ const initialState = {
     duck: 3,
     duckling: 2,
   },
+  targetingInfo: {
+    targeting: false,
+    guesses: [],
+  },
   userName: 'Admiral',
   currentPlayer: 'player',
   everSaved: false,
@@ -100,11 +104,11 @@ const gameReducer = (state = initialState, action) => {
       return newState;
 
     case actionType.COMP_FIRE:
-
+      // const newTargetingInfo = cloneTargetingInfo(state.compTargetingInfo);
       const shotIndex = chooseFireLocation(
         cloneBoard(state.compBoard.hitsAndMissesBoard),
         state.compAvailableShots,
-        null, // TODO: add targeting logic
+        // state.compTargetingData, // TODO: add targeting logic
       );
       const [x, y] = state.compAvailableShots[shotIndex];
       const newCompAvailableShots = cloneAndSplice(state.compAvailableShots, shotIndex);
@@ -113,7 +117,11 @@ const gameReducer = (state = initialState, action) => {
       newHitsAndMissesBoard = result.hitsBoard;
       console.log(result);
       const newUserDuckHealth = { ...state.userDuckHealth };
-      if (result.hit) newUserDuckHealth[result.target]--;
+      if (result.hit) {
+        newUserDuckHealth[result.target]--;
+      }
+      // updateTargetingInfo(newUserDuckHealth[result.target] === 0, newHitsAndMissesBoard, x, y, newTargetingInfo);
+      // } else updateTargetingInfo(false, newHitsAndMissesBoard, )
       const newPlayerBoard = { ...state.playerBoard, hitsAndMissesBoard: newHitsAndMissesBoard,  }
       // check for game over
       return { ...state,
@@ -129,13 +137,15 @@ const gameReducer = (state = initialState, action) => {
       const compData = JSON.parse(action.payload.data.comp_board_state);
       console.log('playerData: ', playerData);
       console.log('compData: ', compData);
-      return {...state, userName: action.payload.username, userID: action.payload.userID };
+      return {...state, userName: action.payload.username, userID: action.payload.userID, playerBoard: playerData, compBoard: compData };
       
     case actionType.NEW_GAME:
       console.log('CREATING NEW GAME... ', action.payload);
       return { ...state, playerBoard: createBoard(), compBoard: createBoard(), userID: action.payload.userID, userName: action.payload.username }
       
-    // case actionType.SAVE_GAME:
+    case actionType.SAVE_GAME:
+      console.log('SAVING GAME...');
+      return state;
     default:
       return state;
   }

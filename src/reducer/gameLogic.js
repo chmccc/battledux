@@ -1,15 +1,24 @@
 
 /**
- * @param {object} board A safe-to-modify copy of the computer's hitsAndMisses board from the store
  * @param {array} availableShots A READ-ONLY array of shots available to the computer
  * @param {object} targetingInfo An object of details on how to target the ship we're trying to sink
  * @returns {array} An index from the array of available shots
 */
-function chooseFireLocation(board, availableShots, targetingInfo) {
+function chooseFireLocation(availableShots, targetingInfo) {
   // just random for now, will expand to have logic for targeting a specific ship
-  const index = Math.floor(Math.random() * availableShots.length);
+  let index;
+  // if (targetingInfo.targeting === true) {
+  //   // pick random from choices
+  //   index = Math.floor(Math.random() * targetingInfo.guesses.length)
+  //   targetingInfo.guesses.splice(index, 1);
+  // } else {
+    index = Math.floor(Math.random() * availableShots.length);
   return index;
 }
+
+// function updateTargetingInfo(justSank, hitsAndMissesBoard, x, y) {
+
+// }
 
 /**
  * @param {object} board A safe-to-modify copy of the computer's hitsAndMisses board from the store
