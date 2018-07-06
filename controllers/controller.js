@@ -89,15 +89,15 @@ const createBoard = () => {
 const controller = {
 
   showGames: (req, res) => {
-    client.query(`SELECT * FROM "game" WHERE user_id='${req.params.id}'`, (err, result) => {
+    client.query(`SELECT * FROM "game"`, (err, result) => {
       if (err) return console.error(err.stack);
       console.log(result.rows);
       return res.json(result.rows);
     });
   },
 
-  showUserss: (req, res) => {
-    client.query(`SELECT * FROM "users" WHERE id='${req.params.id}'`, (err, result) => {
+  showUsers: (req, res) => {
+    client.query(`SELECT * FROM "user"`, (err, result) => {
       if (err) return console.error(err.stack);
       console.log(result.rows);
       return res.json(result.rows);
@@ -124,7 +124,7 @@ const controller = {
     const winsUpdate = status === 'W' ? 'wins + 1' : 'wins';
     const lossesUpdate = status === 'L' ? 'losses + 1' : 'losses';
     const gameAccuracy = hits / turns;
-    // const newUserAccuracy = ((userAccuracy / totalGames) + gameAccuracy) * (totalGames + 1); // HELP! MATH!
+    const newUserAccuracy = ((userAccuracy / totalGames) + gameAccuracy) * (totalGames + 1); // HELP! MATH!
     client.query(`SELECT accuracy FROM "user" WHERE id = ${userID}`, (err, result) => {
       if (err) return console.error(err.stack);
       userAccuracy = result.rows[0]
@@ -144,9 +144,11 @@ const controller = {
   },
 
   loadGame: (req, res) => {
-    client.query(`SELECT * FROM "game" WHERE user_id='${req.params.id}' AND status='A'`, (err, result) => {
+    console.log(res.locals.userID);
+    client.query(`SELECT * FROM "game" WHERE user_id='${res.locals.userID}' AND status='A'`, (err, result) => {
       if (err) return console.error(err.stack);
-      return res.json(result.rows);
+      if (result.rows.length > 0) return res.status(200).json(result.rows[0]);
+      return res.status(206).send(JSON.stringify({userID: res.locals.userID}));
     });
   },
 
@@ -160,7 +162,7 @@ const controller = {
     })
   },
 
-  login: (req, res) => {
+  login: (req, res, next) => {
     const query = {
       text: 'INSERT INTO "user" (name, wins, losses, ships_sunk, accuracy) VALUES ($1, $2, $3, $4, $5)',
       values: [`${req.body.username}`, 0, 0, 0, 0],
@@ -169,22 +171,23 @@ const controller = {
       // console.log('this is result...', result);
       // done();
       if (err) {
-        console.log(err);
-        res.status(400).send(err);
+        console.error(err.stack);
+        return res.status(400).send(err);
       }
       if (result.rowCount === 0) {
         console.log('query', query);
         client.query(query, (err, result) => {
           // done();
           if (err) {
-            console.log(err);
-            res.status(400).send(err);
+            console.error(err.stack);
+            return res.status(400).send(err);
           }
           console.log(result, "is rows...");
-          res.status(200).send(result.rows);
+          return res.status(201).json(result.rows);
         });
       } else {
-        res.status(200).send(result.rows);
+        res.locals.userID = result.rows[0].id;
+        next();
       }
     });
   }

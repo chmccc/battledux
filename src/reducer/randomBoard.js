@@ -84,4 +84,4 @@ const createBoard = () => {
   return { ducksBoard, hitsAndMissesBoard };
 }
 
-export default createBoard;
+export { createBoard, createHitMissBoard };
