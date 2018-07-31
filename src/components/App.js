@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   handleCreate(e) {
-    this.props.create();
+    this.props.saveGame();
   }
 
 
@@ -71,7 +71,7 @@ function mapDispatchToProps(dispatch) {
     playerFire: bindActionCreators(actionCreators.playerFire, dispatch),
     compFire: bindActionCreators(actionCreators.compFire, dispatch),
     login: bindActionCreators(actionCreators.login, dispatch),
-    create: bindActionCreators(actionCreators.create, dispatch),
+    saveGame: bindActionCreators(actionCreators.saveGame, dispatch),
   };
 }
 
@@ -84,6 +84,7 @@ function mapStateToProps(store) {
     playerStats: store.gameReducer.playerStats,
     userName: store.gameReducer.userName,
     currentPlayer: store.gameReducer.currentPlayer,
+    compAvailableMoves: store.gameReducer.compAvailableMoves,
   };
 }
 
